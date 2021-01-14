@@ -1,11 +1,6 @@
-def median(x):
-    n = len(x)
-    if n % 2 == 1:
-        return x[n // 2]
-    else:
-        return (x[n // 2 - 1] + x[n // 2]) // 2
+import statistics as st
 
-n=int(input())
+n=int(input()) # No. of elements of the arrays.
 x = list(map(int, input().split()))
 f = list(map(int, input().split()))
 rage = []
@@ -14,15 +9,15 @@ for i in range(n):
         rage.append(x[i])
 
 rage = sorted(rage)
-print(rage)
+med=st.median(rage)
+q1,q3 = [],[]  # For spliting into half.
+for i in rage:
+	if(i>med):
+		q3.append(i)
+	elif(i<med):
+		q1.append(i)
 
-Q2 = median(rage)
-if n % 2 == 1:
-    q1 = median(rage[0:(n // 2)])
-    q3 = median(rage[(n // 2) + 1:])
-else:
-    q1 = median(x[0:(n // 2)])
-    q3 = median(x[(n // 2):])
+q1 = st.median(q1)
+q3 = st.median(q3)
 
-print(q1)
-print(q3)
+print(abs(q1-q3))
